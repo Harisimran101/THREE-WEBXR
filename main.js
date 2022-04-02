@@ -22,21 +22,22 @@ const scene = new THREE.Scene();
 			const cube = new THREE.Mesh( geometry, material );
 			scene.add( cube );
 
-            anime({
-				targets: cube.position,
-				y: [cube.position.y, '3'],
-				loop: true,
-				direction: 'alternate',
-				ease: 'easeInOutSine',
-				duration: 2000,
-			})
+         
 
 			camera.position.z = 6;
 
 			function animate() {
 				renderer.setAnimationLoop( animate );
 				
-
+				anime({
+					targets: cube.position,
+					y: [cube.position.y, '3'],
+					loop: true,
+					direction: 'alternate',
+					ease: 'easeInOutSine',
+					duration: 2000,
+				})
+				
 				renderer.render( scene, camera );
 			};
 
