@@ -4,6 +4,7 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/loa
 import { VRButton } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/webxr/XRControllerModelFactory.js';
 import { XRHandModelFactory } from 'https://cdn.skypack.dev/three@0.136/examples/jsm/webxr/XRHandModelFactory.js';
+
 let container;
 			let camera, scene, renderer;
 			let controller1, controller2;
@@ -72,7 +73,7 @@ let container;
 				floor.receiveShadow = true;
 				scene.add( floor );
 
-				scene.add( new THREE.HemisphereLight( 0x808080, 0x606060 ) );
+				scene.add( new THREE.HemisphereLight( 0x808080, 0x606060, 1.3 ) );
 
 				const light = new THREE.DirectionalLight( 0xffffff );
 				light.position.set( 0, 6, 0 );
@@ -84,10 +85,19 @@ let container;
 				light.shadow.mapSize.set( 4096, 4096 );
 				scene.add( light );
 
+				const loader = new GLTFLoader();
+				loader.load('model.glb', (gltf) =>{
+					 let model = gltf.scene;
+					 scene.add(model);
+					 model.position.y = 1.5;
+					 model.scale.set(0.3,0.3,0.3)
+				})
+
 				group = new THREE.Group();
 				group.position.z = - 0.5;
 				scene.add( group );
 				const BOXES = 10;
+				
 
 				for ( let i = 0; i < BOXES; i ++ ) {
 
